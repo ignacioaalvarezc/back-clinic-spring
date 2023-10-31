@@ -70,7 +70,7 @@ public class MedicoController {
 //    }
     
     @GetMapping("/{id}")
-    public ResponseEntity<DatosRespuestaMedico> retornaDatosMedicos(@PathVariable Long id) {
+    public ResponseEntity<DatosRespuestaMedico> retornarDatosMedicos(@PathVariable Long id) {
     	Medico medico = medicoRepository.getReferenceById(id);
     	var datosMedicos = new DatosRespuestaMedico(medico.getId(), medico.getNombre(),
     			medico.getEmail(), medico.getTelefono(), medico.getEspecialidad().toString(),

@@ -22,11 +22,12 @@ public class SecurityFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
         var token = request.getHeader("Authorization");
-        if (token == null || token == "") {
+        if (token != null) {
+            token = token.replace("Bearer", "");
+            System.out.println(token);
+            System.out.println(tokenService.getSubject(token));
             throw new RuntimeException("El token enviado no es valido");
-        } token = token.replace("Bearer", "");
-        System.out.println(token);
-        System.out.println(tokenService.getSubject(token));
+        }
         filterChain.doFilter(request, response);
     }
 }
