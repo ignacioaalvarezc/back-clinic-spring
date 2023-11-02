@@ -8,8 +8,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,8 +32,8 @@ public class ConsultaController {
             description = "",
             tags = { "consulta", "post" })
     public ResponseEntity agendar(@RequestBody @Valid DatosAgendarConsulta datos) throws ValidacionDeIntegridad {
-        var response = service.agendar(datos);
-        return ResponseEntity.ok(response);
+        service.agendar(datos);
+        return ResponseEntity.ok(new DatosDetalleConsulta(null, null, null, null));
     }
 
 }
