@@ -35,6 +35,9 @@ public class AgendaDeConsultaService {
 
         var paciente = pacienteRepository.findById(datos.idPaciente()).get();
         var medico = seleccionarMedico(datos);
+        if(medico==null) {
+            throw new ValidacionDeIntegridad(("No existen medicos disponibles para este horario y especialidad."));
+        }
         var consulta = new Consulta(null,medico,paciente,datos.fecha());
         consultaRepository.save(consulta);
         return new DatosDetalleConsulta(consulta);
