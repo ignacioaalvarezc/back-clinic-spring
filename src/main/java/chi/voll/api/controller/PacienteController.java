@@ -49,4 +49,19 @@ public class PacienteController {
         return ResponseEntity.ok(new DatosDetallesPaciente(paciente));
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    @Operation(summary = "Elimina un paciente a partir del ID")
+    public ResponseEntity eliminar(@PathVariable Long id) {
+        var paciente = pacienteRepository.getReferenceById(id);
+        paciente.eliminar();
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Obtiene los detalles para el paciente con el ID indicado")
+    public ResponseEntity detallar(@PathVariable Long id) {
+        var paciente = pacienteRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DatosDetallesPaciente(paciente));
+    }
 }
