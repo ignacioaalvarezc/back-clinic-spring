@@ -1,4 +1,4 @@
-package chi.voll.api.validations;
+package chi.voll.api.domain.consulta.validations;
 
 import chi.voll.api.domain.consulta.DatosAgendarConsulta;
 

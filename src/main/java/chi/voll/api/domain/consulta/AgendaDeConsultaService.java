@@ -4,7 +4,7 @@ import chi.voll.api.domain.medico.Medico;
 import chi.voll.api.domain.medico.MedicoRepository;
 import chi.voll.api.domain.paciente.PacienteRepository;
 import chi.voll.api.infra.errores.ValidacionDeIntegridad;
-import chi.voll.api.validations.ValidadorDeConsultas;
+import chi.voll.api.domain.consulta.validations.ValidadorDeConsultas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,10 +38,20 @@ public class AgendaDeConsultaService {
         if(medico==null) {
             throw new ValidacionDeIntegridad(("No existen medicos disponibles para este horario y especialidad."));
         }
-        var consulta = new Consulta(null,medico,paciente,datos.fecha());
+        var consulta = new Consulta(medico,paciente,datos.fecha());
         consultaRepository.save(consulta);
         return new DatosDetalleConsulta(consulta);
     }
+    /*
+    public void cancelar(DatosCancelamientoConsulta datos) {
+        if (!consultaRepository.existsById(datos.idConsulta())) {
+            throw new ValidacionDeIntegridad("Id de la consulta informado no existe.");
+        }
+        validadoresCancelamiento.forEach(v -> v.validar(datos));
+
+        var consulta = consultaRepository.getReferenceById(datos.idConsulta());
+        consulta.cancelar(datos.motivo());
+    }*/
 
     private Medico seleccionarMedico(DatosAgendarConsulta datos) {
         if(datos.idMedico()!=null){
