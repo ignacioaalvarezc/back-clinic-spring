@@ -12,7 +12,7 @@ public class PacienteSinConsulta {
         var ultimoHorario = datos.fecha().withHour(18);
         var pacienteConConsulta = consultaRepository.existsByPacienteIdAndDatosBetween(datos.idPaciente(),primerHorario,ultimoHorario);
         if(pacienteConConsulta) {
-            throw new ValidationException("");
+            throw new ValidationException("El paciente ya tiene una consulta para este horario.");
         }
     }
 }
