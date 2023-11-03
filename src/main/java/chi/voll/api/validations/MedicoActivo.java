@@ -3,9 +3,13 @@ package chi.voll.api.validations;
 import chi.voll.api.domain.consulta.DatosAgendarConsulta;
 import chi.voll.api.domain.medico.MedicoRepository;
 import jakarta.validation.ValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class MedicoActivo {
+@Component
+public class MedicoActivo implements ValidadorDeConsultas{
 
+    @Autowired
     private MedicoRepository medicoRepository;
 
     public void validar(DatosAgendarConsulta datos) {
