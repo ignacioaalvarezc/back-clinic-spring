@@ -32,8 +32,8 @@ public class ConsultaController {
             description = "",
             tags = { "consulta", "post" })
     public ResponseEntity agendar(@RequestBody @Valid DatosAgendarConsulta datos) throws ValidacionDeIntegridad {
-        service.agendar(datos);
-        return ResponseEntity.ok(new DatosDetalleConsulta(null, null, null, null));
+        var response = service.agendar(datos);
+        return ResponseEntity.ok(response);
     }
 
 }
