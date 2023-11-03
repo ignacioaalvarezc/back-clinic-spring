@@ -15,7 +15,7 @@ public class PacienteActivo {
         var pacienteActivo = pacienteRepository.findActivoById(datos.idPaciente());
 
         if(!pacienteActivo) {
-            throw new ValidationException("No se puede agendar citas con pacientes inactivos en el sistema");
+            throw new ValidationException("No se pueden agendar citas con pacientes inactivos en el sistema");
         }
     }
 }
