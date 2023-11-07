@@ -1,4 +1,4 @@
-create table consulta(
+create table appointment(
     id bigint not null auto_increment,
     medico_id bigint not null,
     paciente_id bigint not null,
