@@ -1,2 +1,2 @@
-ALTER TABLE medico ADD activo boolean;
-UPDATE medico SET activo = 1;
+ALTER TABLE doctor ADD activo boolean;
+UPDATE doctor SET activo = 1;
