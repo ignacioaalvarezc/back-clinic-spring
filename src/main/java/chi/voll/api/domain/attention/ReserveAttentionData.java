@@ -6,5 +6,5 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public record ReserveAttentionData(Long id, @NotNull Long idPaciente, Long idDoctor, @NotNull @Future LocalDateTime date, Speciality speciality) {
+public record ReserveAttentionData(Long id, @NotNull Long idPatient, Long idDoctor, @NotNull @Future LocalDateTime date, Speciality speciality) {
 }

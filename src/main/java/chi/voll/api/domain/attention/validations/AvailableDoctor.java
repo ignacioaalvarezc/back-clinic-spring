@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
  * THIS COMPONENT CLASS VALIDATES IF THE SPECIFIED DOCTOR IS AVAILABLE FOR A NEW ATTENTION RESERVATION.
  * It implements attention validator interface.
  * Implements the validation logic for doctor's availability.
+ * Validates if the doctor is in active status.
  *
  * @author Ignacio Álvarez
  * @version 1.0
@@ -31,11 +32,11 @@ public class AvailableDoctor implements AttentionValidator {
      */
     public void validate(ReserveAttentionData data) {
         if(data.idDoctor()==null) {
-            return;
+            return; // No doctor specified, validation is not required.
         }
         var availableDoctor = doctorRepository.findStatusById(data.idDoctor());
         if(!availableDoctor) {
-            throw new ValidationException("This doctor already has an appointment for this time.");
+            throw new ValidationException("This doctor is not available.");
         }
     }
 }

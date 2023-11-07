@@ -5,7 +5,7 @@ import chi.voll.api.repository.DoctorRepository;
 import chi.voll.api.repository.PatientRepository;
 import chi.voll.api.system.errores.IntegrityValidation;
 import chi.voll.api.domain.attention.validations.AttentionValidator;
-import chi.voll.api.repository.ConsultaRepository;
+import chi.voll.api.repository.AttentionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +19,13 @@ public class ReserveAttentionService {
     @Autowired
     private DoctorRepository doctorRepository;
     @Autowired
-    private ConsultaRepository consultaRepository;
+    private AttentionRepository attentionRepository;
 
     @Autowired
     List<AttentionValidator> validadores;
 
     public DatosDetalleConsulta reserve(ReserveAttentionData datos) {
-        if(!patientRepository.findById(datos.idPaciente()).isPresent()){
+        if(!patientRepository.findById(datos.idPatient()).isPresent()){
             throw new IntegrityValidation("Este id para el paciente no fue encontrado");
         }
         if(datos.idDoctor()!=null && doctorRepository.existsById(datos.idDoctor())) {
@@ -34,13 +34,13 @@ public class ReserveAttentionService {
 
         validadores.forEach(v->v.validate(datos));
 
-        var paciente = patientRepository.findById(datos.idPaciente()).get();
+        var paciente = patientRepository.findById(datos.idPatient()).get();
         var medico = seleccionarMedico(datos);
         if(medico==null) {
             throw new IntegrityValidation(("No existen medicos disponibles para este horario y especialidad."));
         }
         var consulta = new Consulta(medico,paciente,datos.date());
-        consultaRepository.save(consulta);
+        attentionRepository.save(consulta);
         return new DatosDetalleConsulta(consulta);
     }
     /*
