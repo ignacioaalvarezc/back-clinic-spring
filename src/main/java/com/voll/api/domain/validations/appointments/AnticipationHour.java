@@ -1,7 +1,7 @@
 package com.voll.api.domain.validations.appointments;
 
 // IMPORTS.
-import com.voll.api.domain.dto.appointment.ReserveAttentionData;
+import com.voll.api.domain.dto.appointment.ReserveAppointmentData;
 import jakarta.validation.ValidationException;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class AnticipationHour implements AttentionValidator {
      * @throws ValidationException If the reservation is made with less than 30 minutes of anticipation.
      *
      */
-    public void validate(ReserveAttentionData data) {
+    public void validate(ReserveAppointmentData data) {
         var currentTime = LocalDateTime.now();
         var attentionTime = data.date();
         var Before30Min = Duration.between(currentTime,attentionTime).toMinutes()<30;

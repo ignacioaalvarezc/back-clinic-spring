@@ -1,12 +1,11 @@
 package com.voll.api.controllers;
+
 // IMPORTS.
-import chi.voll.api.domain.patient.*;
 import com.voll.api.domain.dto.patient.PatientListData;
 import com.voll.api.domain.dto.patient.PatientRecordData;
 import com.voll.api.domain.dto.patient.PatientUpdateData;
 import com.voll.api.domain.dto.patient.PatientsRecordDetails;
 import com.voll.api.domain.models.Patient;
-import com.voll.api.domain.patient.*;
 import com.voll.api.repository.PatientRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

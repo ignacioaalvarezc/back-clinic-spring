@@ -1,27 +1,41 @@
 package com.voll.api.domain.dto.doctor;
-
+// IMPORTS.
 import com.voll.api.domain.dto.address.AddressData;
 import com.voll.api.domain.models.enumeration.Speciality;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
+/**
+ * THIS RECORD CLASS IS A DATA TRANSFER OBJECT REPRESENTING DETAILED INFORMATION FOR CREATING OR UPDATING A DOCTOR RECORD.
+ * This DTO class follows Java record syntax, providing a concise representation of data.
+ * It includes validation annotations from Jakarta Bean Validation to ensure the integrity of the transferred data.
+ * It encapsulates essential details such as:
+ * @param name Doctor's name.
+ * @param email Doctor's email.
+ * @param phoneNumber Doctor's phone number.
+ * @param dni Doctor's dni.
+ * @param speciality Doctor's speciality.
+ * @param address Doctor's address.
+ *
+ * @author Ignacio Álvarez
+ * @version 1.0
+ * @since 2023-11-07
+ */
 public record DoctorsRecordDetails(
-        @NotBlank
-        String nombre,
-        @NotBlank
+        @NotBlank(message = "Name is required.")
+        String name,
+        @NotBlank(message = "Email is required.")
         @Email
         String email,
-        @NotBlank
-        String telefono,
-        @NotBlank
-        @Pattern(regexp = "\\d[4,6]", message = "Formato de documento invalido")
-        String documento,
-        @NotBlank
+        @NotBlank(message = "Phone number is required.")
+        @Size(min = 0, max = 15)
+        String phoneNumber,
+        @NotBlank(message = "Dni is required.")
+        @Pattern(regexp = "\\d[4,6]", message = "Formato de dni invalido")
+        String dni,
+        @NotBlank(message = "Speciality is required.")
         Speciality speciality,
-        @NotNull
+        @NotNull(message = "Address is required.")
         @Valid
-        AddressData direccion) {
+        AddressData address) {
 }

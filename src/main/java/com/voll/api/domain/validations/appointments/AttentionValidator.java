@@ -1,7 +1,7 @@
 package com.voll.api.domain.validations.appointments;
 
 // IMPORTS.
-import com.voll.api.domain.dto.appointment.ReserveAttentionData;
+import com.voll.api.domain.dto.appointment.ReserveAppointmentData;
 
 /**
  * THIS INTERFACE DEFINES THE CONTRACT FOR VALIDATING ATTENTION RESERVATION DATA.
@@ -18,5 +18,5 @@ public interface AttentionValidator {
      *
      * @param data The attention reservation data to be validated.
      */
-    public void validate(ReserveAttentionData data);
+    public void validate(ReserveAppointmentData data);
 }

@@ -2,7 +2,7 @@ package com.voll.api.domain.validations.appointments;
 
 // IMPORTS.
 import com.voll.api.repository.AttentionRepository;
-import com.voll.api.domain.dto.appointment.ReserveAttentionData;
+import com.voll.api.domain.dto.appointment.ReserveAppointmentData;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,7 +29,7 @@ public class PatientWithoutAppointment implements AttentionValidator {
      * @param data The attention reservation data to be validated.
      * @throws ValidationException Exception if the specified patient has a consultation at the specified time.
      */
-    public void validate(ReserveAttentionData data) {
+    public void validate(ReserveAppointmentData data) {
         var firstHour = data.date().withHour(7);
         var lastHour = data.date().withHour(18);
         var patientWithAttention = attentionRepository.existsByPatientIdAndDateBetween(data.idPatient(),firstHour,lastHour);

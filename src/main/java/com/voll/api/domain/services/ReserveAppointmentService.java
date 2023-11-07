@@ -1,7 +1,7 @@
 package com.voll.api.domain.services;
 
-import com.voll.api.domain.dto.appointment.DatosDetalleConsulta;
-import com.voll.api.domain.dto.appointment.ReserveAttentionData;
+import com.voll.api.domain.dto.appointment.AppointmentDetailData;
+import com.voll.api.domain.dto.appointment.ReserveAppointmentData;
 import com.voll.api.domain.models.Appointment;
 import com.voll.api.domain.models.Doctor;
 import com.voll.api.repository.DoctorRepository;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ReserveAttentionService {
+public class ReserveAppointmentService {
 
     @Autowired
     private PatientRepository patientRepository;
@@ -27,7 +27,7 @@ public class ReserveAttentionService {
     @Autowired
     List<AttentionValidator> validadores;
 
-    public DatosDetalleConsulta reserve(ReserveAttentionData datos) {
+    public AppointmentDetailData reserve(ReserveAppointmentData datos) {
         if(!patientRepository.findById(datos.idPatient()).isPresent()){
             throw new IntegrityValidation("Este id para el paciente no fue encontrado");
         }
@@ -40,11 +40,11 @@ public class ReserveAttentionService {
         var paciente = patientRepository.findById(datos.idPatient()).get();
         var medico = seleccionarMedico(datos);
         if(medico==null) {
-            throw new IntegrityValidation(("No existen medicos disponibles para este horario y especialidad."));
+            throw new IntegrityValidation(("No existen medicos disponibles para este horario y speciality."));
         }
         var consulta = new Appointment(medico,paciente,datos.date());
         attentionRepository.save(consulta);
-        return new DatosDetalleConsulta(consulta);
+        return new AppointmentDetailData(consulta);
     }
     /*
     public void cancelar(DatosCancelamientoConsulta datos) {
@@ -57,12 +57,12 @@ public class ReserveAttentionService {
         consulta.cancelar(datos.motivo());
     }*/
 
-    private Doctor seleccionarMedico(ReserveAttentionData datos) {
+    private Doctor seleccionarMedico(ReserveAppointmentData datos) {
         if(datos.idDoctor()!=null){
             return doctorRepository.getReferenceById(datos.idDoctor());
         }
         if (datos.speciality() == null) {
-            throw new IntegrityValidation("Debe seleccionarse una especialidad para el meédico.");
+            throw new IntegrityValidation("Debe seleccionarse una speciality para el meédico.");
         }
         return doctorRepository.selectDoctorWithSpecialityDate(datos.speciality(), datos.date());
     }

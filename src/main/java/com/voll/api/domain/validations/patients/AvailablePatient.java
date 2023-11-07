@@ -1,7 +1,7 @@
 package com.voll.api.domain.validations.patients;
 
 // IMPORTS.
-import com.voll.api.domain.dto.appointment.ReserveAttentionData;
+import com.voll.api.domain.dto.appointment.ReserveAppointmentData;
 import com.voll.api.domain.validations.appointments.AttentionValidator;
 import com.voll.api.repository.PatientRepository;
 import jakarta.validation.ValidationException;
@@ -30,7 +30,7 @@ public class AvailablePatient implements AttentionValidator {
      * @param data The attention reservation data to be validated.
      * @throws ValidationException Exception if the specified patient is inactive or not available for the reservation.
      */
-    public void validate(ReserveAttentionData data) {
+    public void validate(ReserveAppointmentData data) {
         if(data.idPatient()==null) {
             return; // No patient specified, validation is not required.
         }

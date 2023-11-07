@@ -2,7 +2,6 @@ package com.voll.api.controllers;
 
 // IMPORTS
 import com.voll.api.domain.dto.address.AddressData;
-import chi.voll.api.domain.medico.*;
 import com.voll.api.domain.dto.doctor.DoctorListData;
 import com.voll.api.domain.dto.doctor.DoctorUpdateData;
 import com.voll.api.domain.dto.doctor.DoctorsRecordDetails;

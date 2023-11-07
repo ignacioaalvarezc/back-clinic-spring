@@ -40,12 +40,12 @@ public class Doctor {
     
     public Doctor(DoctorsRecordDetails doctorsRecordDetails) {
     	this.status = true;
-    	this.name = doctorsRecordDetails.nombre();
+    	this.name = doctorsRecordDetails.name();
     	this.email = doctorsRecordDetails.email();
-    	this.phoneNumber = doctorsRecordDetails.telefono();
-    	this.dni = doctorsRecordDetails.documento();
+    	this.phoneNumber = doctorsRecordDetails.phoneNumber();
+    	this.dni = doctorsRecordDetails.dni();
     	this.Speciality = doctorsRecordDetails.speciality();
-    	this.address = new Address(doctorsRecordDetails.direccion());
+    	this.address = new Address(doctorsRecordDetails.address());
     	
     }
     

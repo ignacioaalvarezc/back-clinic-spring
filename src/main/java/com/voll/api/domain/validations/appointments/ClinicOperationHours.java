@@ -1,7 +1,7 @@
 package com.voll.api.domain.validations.appointments;
 
 // IMPORTS.
-import com.voll.api.domain.dto.appointment.ReserveAttentionData;
+import com.voll.api.domain.dto.appointment.ReserveAppointmentData;
 import jakarta.validation.ValidationException;
 import org.springframework.stereotype.Component;
 import java.time.DayOfWeek;
@@ -24,7 +24,7 @@ public class ClinicOperationHours implements AttentionValidator {
      * @param data The attention reservation data to be validated.
      * @throws ValidationException if the reservation falls outside the clinic's operating hours.
      */
-    public void validate(ReserveAttentionData data) {
+    public void validate(ReserveAppointmentData data) {
         var Sunday = DayOfWeek.SUNDAY.equals(data.date().getDayOfWeek());
         var beforeOpening = data.date().getHour()<9;
         var afterClosing = data.date().getHour()>19;

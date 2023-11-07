@@ -1,7 +1,7 @@
 package com.voll.api.domain.validations.doctors;
 
 // IMPORTS.
-import com.voll.api.domain.dto.appointment.ReserveAttentionData;
+import com.voll.api.domain.dto.appointment.ReserveAppointmentData;
 import com.voll.api.domain.validations.appointments.AttentionValidator;
 import com.voll.api.repository.DoctorRepository;
 import jakarta.validation.ValidationException;
@@ -31,7 +31,7 @@ public class AvailableDoctor implements AttentionValidator {
      * @param data The attention reservation data to be validated.
      * @throws ValidationException Exception if the specified doctor is not available for the reservation.
      */
-    public void validate(ReserveAttentionData data) {
+    public void validate(ReserveAppointmentData data) {
         if(data.idDoctor()==null) {
             return; // No doctor specified, validation is not required.
         }
