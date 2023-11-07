@@ -31,7 +31,7 @@ public record DoctorsRecordDetails(
         @Size(min = 0, max = 15)
         String phoneNumber,
         @NotBlank(message = "Dni is required.")
-        @Pattern(regexp = "\\d[4,6]", message = "Formato de dni invalido")
+        @Pattern(regexp = "\\d[4,6]", message = "Invalid DNI format")
         String dni,
         @NotBlank(message = "Speciality is required.")
         Speciality speciality,
