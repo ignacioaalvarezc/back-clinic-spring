@@ -11,8 +11,7 @@ import jakarta.validation.constraints.*;
  * THIS RECORD CLASS IS A DATA TRANSFER OBJECT REPRESENTING SIMPLIFIED DOCTOR INFORMATION FOR LISTING PURPOSES.
  * This DTO class follows Java record syntax, providing a concise representation of data.
  * It includes a specialized constructor to transform a doctor entity into this DTO format.
- *
- * <p>Fields:
+ * It encapsulates necessary information such as:
  * @param id Doctor's ID.
  * @param name Doctor's name.
  * @param email Doctor's email.
@@ -34,7 +33,7 @@ public record DoctorListData(
 		@Email
 		String email,
 		@NotBlank(message = "Phone number is required.")
-		@Size(min = 0, max = 15)
+		@Size(min = 0, max = 12)
 		String phoneNumber,
 		@NotBlank(message = "Speciality number is required.")
 		String speciality,

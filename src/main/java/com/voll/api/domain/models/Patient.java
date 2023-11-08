@@ -44,7 +44,7 @@ public class Patient {
             this.phoneNumber = datos.phoneNumber();
         }
         if (datos.address() != null) {
-            this.address.actualizarDireccion(datos.address());
+            this.address.updateAddress(datos.address());
         }
     }
 

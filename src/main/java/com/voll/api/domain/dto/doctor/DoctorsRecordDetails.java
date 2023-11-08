@@ -9,8 +9,7 @@ import jakarta.validation.Valid;
  * THIS RECORD CLASS IS A DATA TRANSFER OBJECT REPRESENTING DETAILED INFORMATION FOR CREATING OR UPDATING A DOCTOR RECORD.
  * This DTO class follows Java record syntax, providing a concise representation of data.
  * It includes validation annotations from Jakarta Bean Validation to ensure the integrity of the transferred data.
- *
- * <P>Fields:
+ * It encapsulates necessary information such as:
  * @param name Doctor's name.
  * @param email Doctor's email.
  * @param phoneNumber Doctor's phone number.

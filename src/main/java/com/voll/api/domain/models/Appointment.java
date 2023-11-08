@@ -1,6 +1,6 @@
 package com.voll.api.domain.models;
 
-import com.voll.api.domain.models.enumeration.MotivoCancelamiento;
+import com.voll.api.domain.models.enumeration.CancellationReason;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -33,7 +33,7 @@ public class Appointment {
 
     @Column(name = "motivo_cancelamiento")
     @Enumerated(EnumType.STRING)
-    private MotivoCancelamiento motivoCancelamiento;
+    private CancellationReason cancellationReason;
 
     public Appointment(Doctor doctor, Patient patient, LocalDateTime fecha) {
         this.doctor = doctor;
@@ -41,7 +41,7 @@ public class Appointment {
         this.fecha=fecha;
     }
 
-    public void cancelar(MotivoCancelamiento motivo) {
-        this.motivoCancelamiento=motivo;
+    public void cancelar(CancellationReason motivo) {
+        this.cancellationReason =motivo;
     }
 }

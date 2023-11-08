@@ -57,7 +57,7 @@ public class Doctor {
     		this.dni = doctorUpdateData.dni();
     	}
     	if (doctorUpdateData.address() != null) {
-        	this.address = address.actualizarDireccion(doctorUpdateData.address());
+        	this.address = address.updateAddress(doctorUpdateData.address());
     	}    			
     }
     

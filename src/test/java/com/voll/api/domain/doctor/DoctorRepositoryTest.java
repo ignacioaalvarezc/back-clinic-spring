@@ -40,11 +40,11 @@ public class DoctorRepositoryTest {
                 .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
                 .atTime(10, 0);
 
-        var medico = registrarMedico("Jose", "j@gmail.com", "123456", Speciality.CARDIOLOGIA);
+        var medico = registrarMedico("Jose", "j@gmail.com", "123456", Speciality.CARDIOLOGY);
         var patient = registrarPaciente("Antonio", "a@gmail.com", "654321");
         registrarConsulta(medico, patient, proximoLunes10H);
 
-        var medicoLibre = doctorRepository.selectDoctorWithSpecialityDate(Speciality.CARDIOLOGIA,proximoLunes10H);
+        var medicoLibre = doctorRepository.selectDoctorWithSpecialityDate(Speciality.CARDIOLOGY,proximoLunes10H);
 
         assertThat(medicoLibre).isEqualTo(medico);
     }

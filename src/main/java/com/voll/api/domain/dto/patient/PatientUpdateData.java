@@ -34,7 +34,7 @@ public record PatientUpdateData(
         @Email
         String email,
         @NotBlank(message = "Phone number is required.")
-        @Size(min = 0, max = 15)
+        @Size(min = 0, max = 12)
         String phoneNumber,
         @NotNull(message = "Address is required.")
         @Valid

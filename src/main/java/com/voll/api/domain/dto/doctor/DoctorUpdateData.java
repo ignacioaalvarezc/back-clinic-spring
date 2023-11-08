@@ -2,7 +2,8 @@ package com.voll.api.domain.dto.doctor;
 
 // IMPORTS.
 import com.voll.api.domain.dto.address.AddressData;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 
 /**
  * THIS RECORD CLASS IS A DATA TRANSFER OBJECT REPRESENTING UPDATED DOCTOR INFORMATION RECEIVED FROM API REQUESTS.
@@ -24,8 +25,17 @@ public record DoctorUpdateData(
         Long id,
         @NotNull(message = "Name is required.")
         String name,
-        @NotNull(message = "DNI is required.")
+        @NotBlank(message = "Email is required.")
+        @Email
+        String email,
+        @NotBlank(message = "Phone number is required.")
+        @Size(min = 0, max = 12)
+        String phoneNumber,
+        @Pattern(regexp = "\\d{2}\\.\\d{3}\\.\\d{3}\\-\\d|\\d\\.\\d{3}\\.\\d{3}\\-\\d",
+                message = "Invalid DNI format.")
         String dni,
+        @NotNull(message = "Address is required.")
+        @Valid
         AddressData address) {
 
 }

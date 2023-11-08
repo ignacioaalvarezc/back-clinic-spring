@@ -1,11 +1,20 @@
 package com.voll.api.domain.models;
 
+// IMPORTS.
 import com.voll.api.domain.dto.address.AddressData;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * THIS MODEL CLASS REPRESENTS THE ADDRESS INFORMATION EMBEDDED WITHIN OTHER ENTITIES.
+ * An embeddable class used to store address details.
+ *
+ * @author Ignacio Álvarez
+ * @version 1.0
+ * @since 2013-11-07
+ */
 @Embeddable
 @Getter
 @NoArgsConstructor
@@ -17,21 +26,32 @@ public class Address {
     private String complement;
     private String district;
     private String city;
-    
-    public Address(AddressData address) {
+
+	/**
+	 * CONSTRUCTS AN ADDRESS OBJECT FROM THE PROVIDED ADDRESS DATA DTO.
+	 *
+	 * @param address The AddressData object containing address details.
+	 */
+	public Address(AddressData address) {
     	this.street = address.street();
     	this.number = address.number();
     	this.district = address.district();
     	this.complement = address.complement();
     	this.city = address.city();
 	}
-    
-    public Address actualizarDireccion(AddressData direccion) {
-    	this.street = direccion.street();
-    	this.number = direccion.number();
-    	this.district = direccion.district();
-    	this.complement = direccion.complement();
-    	this.city = direccion.city();
+
+	/**
+	 * UPDATES THE ADDRESS INFORMATION BASED ON THE PROVIDED ADDRESS DATA DTO.
+	 *
+	 * @param address The AddressData object containing updated address details.
+	 * @return The updated Address object.
+	 */
+	public Address updateAddress(AddressData address) {
+    	this.street = address.street();
+    	this.number = address.number();
+    	this.district = address.district();
+    	this.complement = address.complement();
+    	this.city = address.city();
     	return this;
     }
 }

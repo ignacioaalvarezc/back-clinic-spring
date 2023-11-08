@@ -32,7 +32,7 @@ public record PatientListData(
         @Email
         String email,
         @NotBlank(message = "Phone number is required.")
-        @Size(min = 0, max = 15)
+        @Size(min = 0, max = 12)
         String phoneNumber,
         @NotBlank(message = "DNI is required.")
         @Pattern(regexp = "\\d{2}\\.\\d{3}\\.\\d{3}\\-\\d|\\d\\.\\d{3}\\.\\d{3}\\-\\d",

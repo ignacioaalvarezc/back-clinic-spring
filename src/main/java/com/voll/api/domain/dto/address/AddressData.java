@@ -27,6 +27,5 @@ public record AddressData(
 		String city,
 		@NotBlank(message = "The number of the street is required.")
 		String number,
-		@NotBlank
 		String complement) {
 }
