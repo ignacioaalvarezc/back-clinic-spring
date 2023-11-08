@@ -36,8 +36,6 @@ public record DoctorsResponseData(
 		@Pattern(regexp = "\\d{2}\\.\\d{3}\\.\\d{3}\\-\\d|\\d\\.\\d{3}\\.\\d{3}\\-\\d",
 				message = "Invalid DNI format.")
 		String dni,
-		@NotBlank(message = "Speciality number is required.")
-		String speciality,
 		@NotNull(message = "Address is required.")
 		@Valid
 		AddressData address) {

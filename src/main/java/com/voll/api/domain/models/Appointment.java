@@ -1,5 +1,7 @@
 package com.voll.api.domain.models;
 
+// IMPORTS.
+
 import com.voll.api.domain.models.enumeration.CancellationReason;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,8 +11,17 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Table(name = "consultas")
-@Entity(name = "Consulta")
+/**
+ * THIS MODEL CLASS REPRESENTS AN APPOINTMENT BETWEEN A DOCTOR AND A PATIENT.
+ * This models the appointments made in the application, storing information such as the doctor, patient,
+ * appointment date and cancellation reason if applicable.
+ *
+ * @author Ignacio Álvarez
+ * @version 1.0
+ * @since 2023-11-07
+ */
+@Table(name = "appointments")
+@Entity(name = "Appointment")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,28 +31,36 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medico_id")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "paciente_id")
+    @JoinColumn(name = "patient_id")
     private Patient patient;
-
-    private LocalDateTime fecha;
-
-    @Column(name = "motivo_cancelamiento")
+    private LocalDateTime date;
+    @Column(name = "cancellation_reason")
     @Enumerated(EnumType.STRING)
-    private CancellationReason cancellationReason;
+    private CancellationReason cancellation_reason;
 
-    public Appointment(Doctor doctor, Patient patient, LocalDateTime fecha) {
+    /**
+     * CONSTRUCTS AN APPOINTMENT OBJECT WITH THE SPECIFIED DOCTOR, PATIENT AND APPOINTMENT DATE.
+     *
+     * @param doctor The doctor involved in the appointment.
+     * @param patient The patient involved in the appointment.
+     * @param date The date and time of the appointment
+     */
+    public Appointment(Doctor doctor, Patient patient, LocalDateTime date) {
         this.doctor = doctor;
         this.patient = patient;
-        this.fecha=fecha;
+        this.date = date;
     }
 
-    public void cancelar(CancellationReason motivo) {
-        this.cancellationReason =motivo;
+    /**
+     * CANCELS THE APPOINTMENT AND SETS THE CANCELLATION REASON.
+     *
+     * @param reason The reason for the cancellation.
+     */
+    public void cancel(CancellationReason reason) {
+        this.cancellation_reason = reason;
     }
 }

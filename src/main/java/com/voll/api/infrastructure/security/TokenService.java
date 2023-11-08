@@ -1,6 +1,6 @@
 package com.voll.api.infrastructure.security;
 
-import com.voll.api.domain.models.Usuario;
+import com.voll.api.domain.models.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -19,13 +19,13 @@ public class TokenService {
     @Value("${api.security.secret}")
     private String apiSecret;
 
-    public String generateToken(Usuario usuario) {
+    public String generateToken(User user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
             return JWT.create()
                     .withIssuer("voll chi")
-                    .withSubject(usuario.getLogin())
-                    .withClaim("id", usuario.getId())
+                    .withSubject(user.getLogin())
+                    .withClaim("id", user.getId())
                     .withExpiresAt(generarFechaExpiracion())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {

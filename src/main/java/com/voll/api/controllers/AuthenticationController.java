@@ -2,7 +2,7 @@ package com.voll.api.controllers;
 
 // IMPORTS.
 import com.voll.api.domain.dto.user.AuthenticatedUserData;
-import com.voll.api.domain.models.Usuario;
+import com.voll.api.domain.models.User;
 import com.voll.api.infrastructure.security.DatosJWTToken;
 import com.voll.api.infrastructure.security.TokenService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -48,7 +48,7 @@ public class AuthenticationController {
         Authentication authToken = new UsernamePasswordAuthenticationToken(authenticatedUserData.login(),
                 authenticatedUserData.password());
         var authenticatedUser = authenticationManager.authenticate(authToken);
-        var JWTtoken = tokenService.generateToken((Usuario) authenticatedUser.getPrincipal());
+        var JWTtoken = tokenService.generateToken((User) authenticatedUser.getPrincipal());
         return ResponseEntity.ok(new DatosJWTToken(JWTtoken));
     }
 }

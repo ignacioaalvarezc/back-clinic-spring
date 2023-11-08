@@ -1,22 +1,21 @@
 package com.voll.api.domain.models;
+
 // IMPORTS
 import com.voll.api.domain.dto.doctor.DoctorUpdateData;
 import com.voll.api.domain.dto.doctor.DoctorsRecordDetails;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Table(name = "doctor")
+/**
+ * THIS MODEL CLASS REPRESENTS A DOCTOR ENTITY.
+ * This models the properties and behavior of doctors, including their personal details,
+ * status, speciality and address.
+ *
+ * @author Ignacio Álvarez
+ * @version 1.0
+ * @since 2023-11-07
+ */
+@Table(name = "doctors")
 @Entity(name = "Doctor")
 @Getter
 @Setter
@@ -32,12 +31,17 @@ public class Doctor {
     private String email;
     private String phoneNumber;
     private String dni;
-    private boolean status;
+    private Boolean status;
     @Enumerated(EnumType.STRING)
     private com.voll.api.domain.models.enumeration.Speciality Speciality;
     @Embedded
     private Address address;
-    
+
+    /**
+     * CONSTRUCTS A DOCTOR OBJECT BASED ON THE PROVIDES DOCTORS RECORD DETAILS DTO.
+     *
+     * @param doctorsRecordDetails The DTO containing details of the doctor.
+     */
     public Doctor(DoctorsRecordDetails doctorsRecordDetails) {
     	this.status = true;
     	this.name = doctorsRecordDetails.name();
@@ -46,9 +50,13 @@ public class Doctor {
     	this.dni = doctorsRecordDetails.dni();
     	this.Speciality = doctorsRecordDetails.speciality();
     	this.address = new Address(doctorsRecordDetails.address());
-    	
     }
-    
+
+    /**
+     * UPDATES THE DOCTOR'S DATA BASED ON THE PROVIDED DOCTOR UPDATE DATA DTO.
+     *
+     * @param doctorUpdateData The DTO containing updated doctor'2 data.
+     */
     public void updateData(DoctorUpdateData doctorUpdateData) {
     	if (doctorUpdateData.name() != null) {
     		this.name = doctorUpdateData.name();
@@ -60,7 +68,10 @@ public class Doctor {
         	this.address = address.updateAddress(doctorUpdateData.address());
     	}    			
     }
-    
+
+    /**
+     * DISABLES THE DOCTOR, SETTING THE STATUS TO INACTIVE.
+     */
     public void disableDoctor() {
     	this.status = false;
     }

@@ -27,7 +27,7 @@ public record AppointmentDetailData(Long id, Long idPatient, Long idDoctor, Loca
      * @param appointment The appointment entity from which data is extracted.
      */
     public AppointmentDetailData(Appointment appointment) {
-            this(appointment.getId(), appointment.getPatient().getId(), appointment.getDoctor().getId(), appointment.getFecha());
+            this(appointment.getId(), appointment.getPatient().getId(), appointment.getDoctor().getId(), appointment.getDate());
         }
 
 }
