@@ -50,14 +50,14 @@ public class Doctor {
     }
     
     public void updateData(DoctorUpdateData doctorUpdateData) {
-    	if (doctorUpdateData.nombre() != null) {
-    		this.name = doctorUpdateData.nombre();
+    	if (doctorUpdateData.name() != null) {
+    		this.name = doctorUpdateData.name();
     	}
-    	if (doctorUpdateData.documento() != null) {
-    		this.dni = doctorUpdateData.documento();
+    	if (doctorUpdateData.dni() != null) {
+    		this.dni = doctorUpdateData.dni();
     	}
-    	if (doctorUpdateData.direccion() != null) {
-        	this.address = address.actualizarDireccion(doctorUpdateData.direccion());
+    	if (doctorUpdateData.address() != null) {
+        	this.address = address.actualizarDireccion(doctorUpdateData.address());
     	}    			
     }
     
