@@ -1,7 +1,8 @@
 package com.voll.api.controllers;
 
 // IMPORTS.
-import com.voll.api.domain.services.ReserveAppointmentService;
+import com.voll.api.domain.dto.appointment.CancelAppointmentData;
+import com.voll.api.domain.services.AppointmentService;
 import com.voll.api.domain.dto.appointment.ReserveAppointmentData;
 import com.voll.api.infrastructure.config.exception.IntegrityValidation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,10 +12,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * CONTROLLER CLASS RESPONSIBLE FOR HANDLING MEDICAL ATTENTION RESERVATIONS.
@@ -33,7 +31,7 @@ public class AppointmentController {
 
     // DEPENDENCY INJECTIONS.
     @Autowired
-    private ReserveAppointmentService reserveAppointmentService;
+    private AppointmentService appointmentService;
 
     /**
      * ENDPOINT TO REGISTER A MEDICAL CONSULTATION IN THE DATABASE.
@@ -48,8 +46,35 @@ public class AppointmentController {
             summary = "Register an attention in the database",
             description = "Registers a new medical consultation based on the provided data",
             tags = { "appointment", "post" })
-    public ResponseEntity reserveAppointment(@RequestBody @Valid ReserveAppointmentData data) throws IntegrityValidation {
-        var response = reserveAppointmentService.reserve(data);
+    public ResponseEntity reserveAppointment(@RequestBody
+                                             @Valid
+                                             ReserveAppointmentData data)
+                                                throws IntegrityValidation {
+        var response = appointmentService.reserveAppointment(data);
         return ResponseEntity.ok(response);
     }
+
+    /**
+     * ENDPOINT TO CANCEL A MEDICAL CONSULTATION IN THE DATABSE.
+     *
+     * @param id Appointment's ID.
+     * @param data Information for canceling the medical appointment.
+     * @return ResponseEntity containing the response from the cancellation service.
+     * @throws IntegrityValidation Exception if there are validation or integrity problems with the data.
+     */
+    @DeleteMapping("/{id}")
+    @Transactional
+    @Operation(
+            summary= "Cancel an appointment in the database",
+            description = "Cancels an existing medical consultation based on the provided data",
+            tags = { "appointment", "delete" })
+    public ResponseEntity cancelAppointment(@PathVariable Long id,
+                                            @RequestBody
+                                            @Valid
+                                            CancelAppointmentData data)
+                                                throws IntegrityValidation {
+        var response = appointmentService.cancelAppointment(data);
+        return ResponseEntity.ok(response);
+    }
+    )
 }
