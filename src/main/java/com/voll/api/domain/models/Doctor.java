@@ -1,9 +1,13 @@
 package com.voll.api.domain.models;
 
 // IMPORTS
+
 import com.voll.api.domain.dto.doctor.DoctorUpdateData;
 import com.voll.api.domain.dto.doctor.DoctorsRecordDetails;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 /**
@@ -32,8 +36,11 @@ public class Doctor {
     private String phoneNumber;
     private String dni;
     private Boolean status;
+    @NotNull
+    @NotBlank
+    @NotEmpty
     @Enumerated(EnumType.STRING)
-    private com.voll.api.domain.models.enumeration.Speciality Speciality;
+    private com.voll.api.domain.models.enumeration.Speciality speciality;
     @Embedded
     private Address address;
 
@@ -48,7 +55,7 @@ public class Doctor {
     	this.email = doctorsRecordDetails.email();
     	this.phoneNumber = doctorsRecordDetails.phoneNumber();
     	this.dni = doctorsRecordDetails.dni();
-    	this.Speciality = doctorsRecordDetails.speciality();
+    	this.speciality = doctorsRecordDetails.speciality();
     	this.address = new Address(doctorsRecordDetails.address());
     }
 

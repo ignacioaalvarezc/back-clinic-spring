@@ -1,0 +1,1 @@
+ALTER TABLE doctor ADD phone_number VARCHAR(20) NOT NULL;

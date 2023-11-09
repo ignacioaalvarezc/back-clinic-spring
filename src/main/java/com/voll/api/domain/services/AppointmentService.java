@@ -36,7 +36,7 @@ public class AppointmentService {
     private AppointmentRepository appointmentRepository;
     @Autowired
     List<AttentionValidator> validators;
-    @Autowired
+
     List<CancellationValidator> cancelValidators;
 
     /**
@@ -103,7 +103,7 @@ public class AppointmentService {
         // CANCEL THE APPOINTMENT AND SAVE THE CHANGES.
         var appointment = appointmentRepository.getReferenceById(data.id());
         appointment.cancel(data.reason());
-        appointmentRepository.save(appointment);
+        appointmentRepository.delete(appointment);
         return new AppointmentDetailData(appointment);
     }
 }

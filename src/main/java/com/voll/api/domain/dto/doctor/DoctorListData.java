@@ -35,7 +35,8 @@ public record DoctorListData(
 		@NotBlank(message = "Phone number is required.")
 		@Size(min = 0, max = 12)
 		String phoneNumber,
-		@NotBlank(message = "Speciality number is required.")
+		@NotNull
+		@NotBlank(message = "Speciality is required.")
 		String speciality,
 		@NotBlank(message = "DNI is required.")
 		@Pattern(regexp = "\\d{2}\\.\\d{3}\\.\\d{3}\\-\\d|\\d\\.\\d{3}\\.\\d{3}\\-\\d",

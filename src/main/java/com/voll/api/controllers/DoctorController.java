@@ -54,8 +54,8 @@ public class DoctorController {
     public ResponseEntity<DoctorsResponseData> saveDoctor(@RequestBody @Valid DoctorsRecordDetails doctorsRecordDetails,
 														  UriComponentsBuilder uriComponentsBuilder) {
     	Doctor doctor = doctorRepository.save(new Doctor(doctorsRecordDetails));
-    	DoctorsResponseData doctorsResponseData = new DoctorsResponseData(doctor.getId(), doctor.getName(),
-    			doctor.getEmail(), doctor.getPhoneNumber(), doctor.getSpeciality().toString(),
+    	DoctorsResponseData doctorsResponseData = new DoctorsResponseData(doctor.getId(), doctor.getName(), doctor.getDni(),
+    			doctor.getEmail(), doctor.getPhoneNumber(), doctor.getSpeciality(),
     			new AddressData(doctor.getAddress().getStreet(), doctor.getAddress().getDistrict(),
     					doctor.getAddress().getCity(), doctor.getAddress().getNumber(),
     					doctor.getAddress().getComplement()));
@@ -90,8 +90,8 @@ public class DoctorController {
     public ResponseEntity updateDoctor(@RequestBody @Valid DoctorUpdateData doctorUpdateData) {
     	Doctor doctor = doctorRepository.getReferenceById(doctorUpdateData.id());
     	doctor.updateData(doctorUpdateData);
-    	return ResponseEntity.ok(new DoctorsResponseData(doctor.getId(), doctor.getName(),
-    			doctor.getEmail(), doctor.getPhoneNumber(), doctor.getSpeciality().toString(),
+    	return ResponseEntity.ok(new DoctorsResponseData(doctor.getId(), doctor.getName(), doctor.getDni(),
+    			doctor.getEmail(), doctor.getPhoneNumber(), doctor.getSpeciality(),
     			new AddressData(doctor.getAddress().getStreet(), doctor.getAddress().getDistrict(),
     					doctor.getAddress().getCity(), doctor.getAddress().getNumber(),
     					doctor.getAddress().getComplement())));
@@ -122,8 +122,8 @@ public class DoctorController {
 	@Operation(summary = "Get the doctors records according to id.")
     public ResponseEntity<DoctorsResponseData> returnDoctorData(@PathVariable Long id) {
     	Doctor doctor = doctorRepository.getReferenceById(id);
-    	var doctorData = new DoctorsResponseData(doctor.getId(), doctor.getName(),
-    			doctor.getEmail(), doctor.getPhoneNumber(), doctor.getSpeciality().toString(),
+    	var doctorData = new DoctorsResponseData(doctor.getId(), doctor.getName(), doctor.getDni(),
+    			doctor.getEmail(), doctor.getPhoneNumber(), doctor.getSpeciality(),
     			new AddressData(doctor.getAddress().getStreet(), doctor.getAddress().getDistrict(),
     					doctor.getAddress().getCity(), doctor.getAddress().getNumber(),
     					doctor.getAddress().getComplement()));

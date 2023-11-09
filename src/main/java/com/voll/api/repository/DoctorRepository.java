@@ -1,12 +1,14 @@
 package com.voll.api.repository;
 
 // IMPORTS.
+
 import com.voll.api.domain.models.Doctor;
 import com.voll.api.domain.models.enumeration.Speciality;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 
@@ -37,7 +39,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long>{
     @Query("""
             select d from Doctor d
             where d.status = true and
-            d.speciality=:speciality and
+            d.speciality =:speciality and
             d.id not in(
             select a.doctor.id from Appointment a
             where a.date=:date
@@ -45,7 +47,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long>{
             order by rand()
             limit 1
             """)
-    Doctor selectDoctorWithSpecialityDate(Speciality speciality, LocalDateTime date);
+    Doctor selectDoctorWithSpecialityDate(@Param("speciality") Speciality speciality, LocalDateTime date);
 
     /**
      * RETRIEVES THE STATUS OF A DOCTOR BY THEIR ID.

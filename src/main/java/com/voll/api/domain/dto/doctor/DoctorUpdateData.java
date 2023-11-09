@@ -2,6 +2,7 @@ package com.voll.api.domain.dto.doctor;
 
 // IMPORTS.
 import com.voll.api.domain.dto.address.AddressData;
+import com.voll.api.domain.models.enumeration.Speciality;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
@@ -34,6 +35,9 @@ public record DoctorUpdateData(
         @Pattern(regexp = "\\d{2}\\.\\d{3}\\.\\d{3}\\-\\d|\\d\\.\\d{3}\\.\\d{3}\\-\\d",
                 message = "Invalid DNI format.")
         String dni,
+        @NotNull
+        @NotBlank(message = "Speciality is required.")
+        Speciality speciality,
         @NotNull(message = "Address is required.")
         @Valid
         AddressData address) {

@@ -34,6 +34,7 @@ public record DoctorsRecordDetails(
         @Pattern(regexp = "\\d{2}\\.\\d{3}\\.\\d{3}\\-\\d|\\d\\.\\d{3}\\.\\d{3}\\-\\d",
                 message = "Invalid DNI format.")
         String dni,
+        @NotNull
         @NotBlank(message = "Speciality is required.")
         Speciality speciality,
         @NotNull(message = "Address is required.")

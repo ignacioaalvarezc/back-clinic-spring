@@ -76,5 +76,4 @@ public class AppointmentController {
         var response = appointmentService.cancelAppointment(data);
         return ResponseEntity.ok(response);
     }
-    )
 }
