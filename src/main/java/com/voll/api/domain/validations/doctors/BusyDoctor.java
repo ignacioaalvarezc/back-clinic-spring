@@ -2,7 +2,7 @@ package com.voll.api.domain.validations.doctors;
 
 // IMPORTS.
 import com.voll.api.domain.validations.appointments.AttentionValidator;
-import com.voll.api.repository.AttentionRepository;
+import com.voll.api.repository.AppointmentRepository;
 import com.voll.api.domain.dto.appointment.ReserveAppointmentData;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class BusyDoctor implements AttentionValidator {
 
     // DEPENDENCY INJECTIONS.
     @Autowired
-    private AttentionRepository attentionRepository;
+    private AppointmentRepository appointmentRepository;
 
     /**
      * VALIDATES THE ATTENTION RESERVATION DATA TO ENSURE THE SPECIFIED DOCTOR IS NOT ALREADY BUSY AT THE SPÉCIFIED TIME
@@ -30,7 +30,7 @@ public class BusyDoctor implements AttentionValidator {
     public void validate(ReserveAppointmentData data) {
         if(data.idDoctor()==null)
             return; // No doctor specified, validation is not required.
-        var busyDoctor = attentionRepository.existsByDoctorIdAndDate(data.idDoctor(), data.date());
+        var busyDoctor = appointmentRepository.existsByDoctorIdAndDate(data.idDoctor(), data.date());
         if(busyDoctor) {
             throw new ValidationException("This doctor is already busy at this time.");
         }

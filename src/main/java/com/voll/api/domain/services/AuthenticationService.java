@@ -1,7 +1,7 @@
 package com.voll.api.domain.services;
 
 // IMPORTS.
-import com.voll.api.repository.UsuarioRepository;
+import com.voll.api.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class AuthenticationService implements UserDetailsService {
 
 	// DEPENDENCY INJECTIONS.
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UserRepository userRepository;
 
 	/**
 	 * LOADS USER DETAILS FROM THE DATABASE BASED ON THE PROVIDED USERNAME.
@@ -34,6 +34,6 @@ public class AuthenticationService implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return usuarioRepository.findByLogin(username);
+		return userRepository.findByLogin(username);
 	}
 }

@@ -9,7 +9,7 @@ import com.voll.api.domain.models.Doctor;
 import com.voll.api.domain.validations.appointments.AttentionValidator;
 import com.voll.api.domain.validations.appointments.CancellationValidator;
 import com.voll.api.infrastructure.config.exception.IntegrityValidation;
-import com.voll.api.repository.AttentionRepository;
+import com.voll.api.repository.AppointmentRepository;
 import com.voll.api.repository.DoctorRepository;
 import com.voll.api.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class AppointmentService {
     @Autowired
     private DoctorRepository doctorRepository;
     @Autowired
-    private AttentionRepository attentionRepository;
+    private AppointmentRepository appointmentRepository;
     @Autowired
     List<AttentionValidator> validators;
     @Autowired
@@ -65,7 +65,7 @@ public class AppointmentService {
         }
         // CREATE AND SAVE THE APPOINTMENT.
         var appointment = new Appointment(doctor,patient,data.date());
-        attentionRepository.save(appointment);
+        appointmentRepository.save(appointment);
         return new AppointmentDetailData(appointment);
     }
 
@@ -95,15 +95,15 @@ public class AppointmentService {
      */
     public AppointmentDetailData cancelAppointment(CancelAppointmentData data) {
         // VALIDATE APPOINTMENT EXISTENCE.
-        if (!attentionRepository.existsById(data.id())) {
+        if (!appointmentRepository.existsById(data.id())) {
             throw new IntegrityValidation("Appointment not found.");
         }
         // RUN CANCELLATION VALIDATION LOGIC.
         cancelValidators.forEach(v -> v.validate(data));
         // CANCEL THE APPOINTMENT AND SAVE THE CHANGES.
-        var appointment = attentionRepository.getReferenceById(data.id());
+        var appointment = appointmentRepository.getReferenceById(data.id());
         appointment.cancel(data.reason());
-        attentionRepository.save(appointment);
+        appointmentRepository.save(appointment);
         return new AppointmentDetailData(appointment);
     }
 }
